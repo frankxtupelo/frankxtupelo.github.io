@@ -1,12 +1,54 @@
+/* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url(https://db.onlinewebfonts.com/c/d3a17ad47cc0f046e0ef83d52e458097?family=Anderson+Grotesk);
+/* variables */
+:root {
+  --header-height: 2.5rem; 
+  --header-color: transparent;
+  
+  /* colors */
+  --first-color: #6b6b6b;
+  --title-color: #232323;
+  --text-color: #fff;
+  --text-color-light: #6b6b6b;
+  --body-color: #fff; 
+  --container-color: #b3b3b3;
+  
+  /* font and typography */
+  /* .5rem = 8px | 1rem = 16px */
+  --body-font: 'Poppins', 'sans-serif'; /* 'Inter', sans-serif; */
+  --biggest-font-size: 3rem; /* 1.5rem */
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+  --tiny-font-size: .625rem;
+  
+  /* font weight */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  
+  /* z-index */
+  --z-normal: 1;
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
 
+
+/* MAIN CSS */
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', 'sans-serif'; 
+    font-family: var(--body-font); /* 'Poppins', 'sans-serif' */ 
+    box-sizing: border-box;
 }
 
 body {
+    color: var(--text-color);
     background: #000;/* #0a2a43; */
     min-height: 1500px;
 }
@@ -59,13 +101,226 @@ section img{
     z-index: 1;
 }
 
+#Text .letter {
+	display: inline-block;
+	line-height: 1em;
+}
+
 #road {
     z-index: 2;
 }
 
-/* Media breakpoint 768px */
-@media (min-width: 768px) {
+
+  /* Navigation */
+.navArea {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color:var(--header-color);
+    backdrop-filter: blur(10px);
+    padding: 20px 15px 0px 15px;
+    
+    z-index: 100001;
+}
+.navWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--header-height);
+    border-bottom: 0.5px solid #232323;
+    z-index: 101;
+  }
+  .navLogo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    user-select: none;
+    padding: 50px 0px;
+    
+    z-index: 100002; /* will keep logo above all overlapping elements. */
+  }
+  .navLogo:hover{
+    animation: text-shadow 4s ease-in-out 1;
+  }
+  .navMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color:var(--header-color);
+    backdrop-filter: blur(10px);
+  
+    transform: translateX(-100%); /* -100 */
+    transition: .5s linear;
+    /* centers navList */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navMenu.show {
+    transform: translateX(0%);
+  }
+  .navList {
+    display: block;
+    list-style-type: none;
+  }
+  .navItem {
+    display: block;
+    margin: 0px 0px 50px 0px;
+    text-align: center;
+  }
+  .navItem a {
+    position: relative;
+    color: var(--text-color);
+    font-size: 1.1em;
+    font-weight: 400;
+    text-decoration: none;
+    margin-left: 2px;
+    padding: 0px 2px;
+    transition: .5s ease-in-out;
+  }
+  .navItem a::after{
+    content: ",";
+  }
+  .navItem a:hover {
+    animation: text-shadow 4s ease-in-out 1;
+  }
+  .navItem a.active {
+    animation: text-shadow 4s ease-in-out infinite;
+  }
+  .navItem a span:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-color);
+    bottom: -2px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform .7s ease-in;
+  }
+  .navItem a:hover span:after,
+  .navItem a.active span:after {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+  }
+  .navButton {
+    height: 32px;
+    width: 32px;
+    background-color: transparent;
+    border: none;
+    z-index: 100003; /* will keep control button above all overlapping elements. */
+  }
+  /* Nav Animated Icon */
+  #navIcon {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin: 0px auto;
+    font-size: 16px; /* 18px/inherited font size breakes the button measurments. */
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+  }
+  #navIcon span {
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 0px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+  }
+  .navButton:hover #navIcon span {
+    background-color: var(--text-color);
+  }
+  #navIcon span:nth-child(1) {
+    top: 25%;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+  }
+  #navIcon span:nth-child(2) {
+    top: 50%;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+  }
+  #navIcon span:nth-child(3) {
+    top: 75%;
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+  }
+  #navIcon.navIconOpen span:nth-child(1) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    
+    top: 14%;
+    left: 14%;
+  }
+  
+  #navIcon.navIconOpen span:nth-child(2) {
+    width: 0%;
+    opacity: 0;
+  }
+  #navIcon.navIconOpen span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    
+    top: 86%;
+    left: 14%;
+  }
+  
+  /* Media breakpoint 768px */
+  @media (min-width: 768px) {
+    /* Main css */
     #text {
         font-size: 10em;
     }
-}
+    /* Navigation */
+    .navMenu {
+        display: block;
+        position: relative;
+        height: auto;
+        width: auto;
+        transform: translateX(0%);
+        background-color:var(--header-color);
+        backdrop-filter: blur(10px);
+    }
+    .navItem {
+        display: inline;
+        margin: 0px 0px 0px 0px;
+    }
+    .navButton {
+        display: none;
+    }
+  }
+  
+
+
+

@@ -2,10 +2,10 @@
     <head>
         <meta charset="utf8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="thexluca">
+        <meta name="author" content="frankxtupelo">
         <meta name="description" content="Parallax Website">
         <meta name="keywords" content="Parallax Scrolling Website, tutorial I followed from https://youtu.be/TawH-AqHTXc">
-        <title>Parallax Website</title>
+        <title>frankxtupelo</title>
         <!-- Favicon -->
         <link rel="favicon" type="img/png" sizes="16x16" href="images/favicon.ico">
         <!-- CSS -->
@@ -17,6 +17,28 @@
 
     
     <body>
+        <header class="navArea">
+            <div class="navWrapper">
+                <h1 class="navSection navLogo">frankxtupelo</h1>
+    
+                <nav class="navSection navMenu">
+                    <ul class="navList">
+                        <li class="navItem" ><a href="#home" class="home active">home<span></span></a></li>
+                        <li class="navItem" ><a href="#work" class="work">work<span></span></a></li>
+                        <li class="navItem" ><a href="#contact" class="contact">contact<span></span></a></li>
+                        <li class="navItem" ><a href="#support" class="support">support<span></span></a></li>
+                    </ul>
+                </nav>
+                
+                <button class="navSection navButton">
+                    <div id="navIcon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>    
+            </div>
+        </header>
         <section>
             <img src="assets/bg.jpg" id="bg">
             <img src="assets/moon.png" id="moon">
@@ -25,6 +47,8 @@
             <h2 id="text">Moon Light</h2>
         </section>
         <!-- Javascript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script type="text/javascript" src="js/nav.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </body>
 
